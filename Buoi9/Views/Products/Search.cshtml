@@ -1,0 +1,90 @@
+﻿@using System.Linq
+@model IEnumerable<Buoi9.Models.Product>
+
+@{
+    ViewBag.Title = "Tra cứu hàng hóa";
+}
+
+<h2>Tra cứu hàng hóa</h2>
+
+@using (Html.BeginForm("Search", "Products", FormMethod.Get))
+{
+    <p>
+        <label>Tên sản phẩm:</label>
+        <input type="text" name="keyword"
+               value="@ViewBag.Keyword"
+               placeholder="Nhập một phần tên" />
+    </p>
+
+    <p>
+        <strong>Mức tồn kho:</strong><br />
+        <label>
+            @Html.RadioButton("stock", "", (string)ViewBag.Stock == "")
+            Tất cả
+        </label>
+        <label>
+            @Html.RadioButton("stock", "out", (string)ViewBag.Stock == "out")
+            Hết hàng
+        </label>
+        <label>
+            @Html.RadioButton("stock", "low", (string)ViewBag.Stock == "low")
+            Sắp hết
+        </label>
+        <label>
+            @Html.RadioButton("stock", "enough", (string)ViewBag.Stock == "enough")
+            Đủ hàng
+        </label>
+    </p>
+
+    <p>
+        <strong>Sắp xếp giá:</strong><br />
+        <label>
+            @Html.RadioButton("sort", "asc", (string)ViewBag.Sort != "desc")
+            Tăng dần
+        </label>
+        <label>
+            @Html.RadioButton("sort", "desc", (string)ViewBag.Sort == "desc")
+            Giảm dần
+        </label>
+    </p>
+
+    <button type="submit">Tra cứu</button>
+    @Html.ActionLink("Xóa bộ lọc", "Search", "Products")
+}
+
+<hr />
+
+@if (!Model.Any())
+{
+    <p>Không tìm thấy sản phẩm phù hợp.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ProductName</td>
+                    <td>@p.Category</td>
+                    <td>@p.Price.ToString("N2")</td>
+                    <td>@p.Quantity</td>
+                    <td>
+                        @(p.Quantity == 0
+                            ? "Hết hàng"
+                            : p.Quantity <= 4 ? "Sắp hết" : "Đủ hàng")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Quản lý kho</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #222;
+        }
+
+        header, footer {
+            padding: 18px 28px;
+            background: #17365d;
+            color: white;
+        }
+
+        .page {
+            display: flex;
+            min-height: 70vh;
+        }
+
+        nav {
+            width: 230px;
+            padding: 20px;
+            background: #eef3f8;
+        }
+
+            nav a {
+                display: block;
+                padding: 9px;
+                color: #17365d;
+                text-decoration: none;
+            }
+
+                nav a:hover {
+                    background: #d7e5f3;
+                }
+
+        main {
+            flex: 1;
+            padding: 24px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header><strong>Lê Hữu Phát — MSSV: 25DH230022</strong></header>
+
+    <div class="page">
+        <nav>
+            @Html.ActionLink("Câu 2: Danh sách và sửa", "Index", "Products")
+            @Html.ActionLink("Câu 3: Tra cứu", "Search", "Products")
+            @Html.ActionLink("Câu 4: Kiểm kê", "Inventory", "Products")
+            @Html.ActionLink("Câu 5: Kiểm kê hai sản phẩm", "InventoryTwo", "Products")
+            @Html.ActionLink("Câu 6: Thêm sản phẩm", "Create", "Products")
+            @Html.ActionLink("Câu 7: Thống kê", "Statistics", "Products")
+        </nav>
+        <main>@RenderBody()</main>
+    </div>
+
+    <footer>Ngày sinh: 02/01/2007</footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

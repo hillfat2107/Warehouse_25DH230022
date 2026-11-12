@@ -1,0 +1,41 @@
+﻿@model Buoi9.Models.Product
+
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+}
+
+<h2>Thêm sản phẩm</h2>
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    <p>
+        <label>Tên sản phẩm</label><br />
+        @Html.TextBoxFor(m => m.ProductName)
+        @Html.ValidationMessageFor(m => m.ProductName)
+    </p>
+
+    <p>
+        <label>Danh mục</label><br />
+        @Html.TextBoxFor(m => m.Category)
+        @Html.ValidationMessageFor(m => m.Category)
+    </p>
+
+    <p>
+        <label>Đơn giá</label><br />
+        @Html.TextBoxFor(m => m.Price)
+        @Html.ValidationMessageFor(m => m.Price)
+    </p>
+
+    <p>
+        <label>Số lượng</label><br />
+        @Html.TextBoxFor(m => m.Quantity)
+        @Html.ValidationMessageFor(m => m.Quantity)
+    </p>
+
+    <button type="submit">Thêm sản phẩm</button>
+}
+
+<p>@Html.ActionLink("Về danh sách", "Index", "Products")</p>

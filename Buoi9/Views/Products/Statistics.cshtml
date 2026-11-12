@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Thống kê kho";
+    decimal totalValue = (decimal)ViewBag.TotalValue;
+}
+
+<h2>Thống kê kho</h2>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Số sản phẩm</th>
+            <td>@ViewBag.TotalProducts</td>
+        </tr>
+        <tr>
+            <th>Số sản phẩm hết hàng</th>
+            <td>@ViewBag.OutOfStock</td>
+        </tr>
+        <tr>
+            <th>Tổng giá trị hàng tồn</th>
+            <td>@totalValue.ToString("N2") đ</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>@Html.ActionLink("Làm mới thống kê", "Statistics", "Products")</p>
+<p>@Html.ActionLink("Xem danh sách sản phẩm", "Index", "Products")</p>

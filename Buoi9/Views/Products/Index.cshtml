@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Buoi9.Models.Product>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Tình trạng</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductID</td>
+                <td>@p.ProductName</td>
+                <td>@p.Category</td>
+                <td>@p.Price.ToString("N2")</td>
+                <td>@p.Quantity</td>
+                <td>
+                    @(p.Quantity == 0
+                        ? "Hết hàng"
+                        : p.Quantity <= 4 ? "Sắp hết" : "Đủ hàng")
+                </td>
+                <td>
+                    @Html.ActionLink(
+                             "Sửa", "Edit", "Products",
+                             new { id = p.ProductID }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

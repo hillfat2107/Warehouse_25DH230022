@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Cập nhật số lượng kiểm kê";
+}
+
+<h2>Cập nhật số lượng kiểm kê</h2>
+
+@if (ViewBag.Result != null)
+{
+    <p style="color: green; font-weight: bold">
+        @ViewBag.Result
+    </p>
+    <p>@Html.ActionLink("Xem danh sách sau cập nhật", "Index", "Products")</p>
+}
+
+@using (Html.BeginForm("Inventory", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <p>
+        <label>Chọn sản phẩm</label><br />
+        @Html.DropDownList(
+                 "productId",
+                 (SelectList)ViewBag.Products,
+                 "-- Chọn sản phẩm --")
+        @Html.ValidationMessage("productId")
+    </p>
+
+    <p>
+        <label>Số lượng thực tế kiểm đếm</label><br />
+        @Html.TextBox("actualQuantity", null,
+                 new { placeholder = "Nhập số nguyên không âm" })
+        @Html.ValidationMessage("actualQuantity")
+    </p>
+
+    <button type="submit">Cập nhật kiểm kê</button>
+}

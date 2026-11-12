@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Buoi9.Models.Product>
+
+@{
+    ViewBag.Title = "Kiểm kê hai sản phẩm";
+}
+
+<h2>Kiểm kê hai sản phẩm</h2>
+
+@if (ViewBag.Result != null)
+{
+    <p style="color: green; font-weight: bold">@ViewBag.Result</p>
+}
+
+@if (ViewBag.Error != null)
+{
+    <p style="color: red; font-weight: bold">@ViewBag.Error</p>
+}
+
+@using (Html.BeginForm("InventoryTwo", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        <label>ProductID thứ nhất</label><br />
+        @Html.TextBox("productId1")
+        @Html.ValidationMessage("productId1")
+    </p>
+    <p>
+        <label>Số lượng thực tế thứ nhất</label><br />
+        @Html.TextBox("actualQuantity1")
+        @Html.ValidationMessage("actualQuantity1")
+    </p>
+
+    <p>
+        <label>ProductID thứ hai</label><br />
+        @Html.TextBox("productId2")
+        @Html.ValidationMessage("productId2")
+    </p>
+    <p>
+        <label>Số lượng thực tế thứ hai</label><br />
+        @Html.TextBox("actualQuantity2")
+        @Html.ValidationMessage("actualQuantity2")
+    </p>
+
+    <button type="submit">Cập nhật cả hai sản phẩm</button>
+}
+
+<h3>Sản phẩm hiện có trong SQL Server</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ProductID</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng hiện tại</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductID</td>
+                <td>@p.ProductName</td>
+                <td>@p.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,40 @@
+﻿@model Buoi9.Models.Product
+
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+}
+
+<h2>Sửa sản phẩm</h2>
+
+@using (Html.BeginForm(
+    "Edit", "Products",
+    new { id = Model.ProductID },
+    FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <p><strong>Mã sản phẩm:</strong> @Model.ProductID</p>
+    <p><strong>Số lượng hiện có:</strong> @Model.Quantity</p>
+
+    <div>
+        <label>Tên sản phẩm</label><br />
+        @Html.TextBoxFor(m => m.ProductName)
+        @Html.ValidationMessageFor(m => m.ProductName)
+    </div>
+
+    <div>
+        <label>Danh mục</label><br />
+        @Html.TextBoxFor(m => m.Category)
+        @Html.ValidationMessageFor(m => m.Category)
+    </div>
+
+    <div>
+        <label>Đơn giá</label><br />
+        @Html.TextBoxFor(m => m.Price)
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <p><button type="submit">Lưu thay đổi</button></p>
+}
+
+@Html.ActionLink("Quay lại danh sách", "Index", "Products")
